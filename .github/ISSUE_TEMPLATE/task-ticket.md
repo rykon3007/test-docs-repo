@@ -1,7 +1,7 @@
 ---
-name: Project Story Ticket
-about: for Project Story Ticket
-title: "[STORY] "
+name: Task Ticket
+about: for Project Task Ticket
+title: ""
 labels: ''
 assignees: ''
 

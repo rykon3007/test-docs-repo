@@ -1,0 +1,12 @@
+name: Append Message to Created Issue from Draft Issue
+
+on:
+    issues:
+      types: 
+        - opened
+
+jobs:
+    some_task:
+        runs-on: ubuntu-latest
+        steps:
+        - run: echo '${{ toJSON(github.event) }}'
