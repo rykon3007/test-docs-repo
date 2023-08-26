@@ -6,7 +6,21 @@ on:
         - opened
 
 jobs:
-    some_task:
+    edit_issue:
         runs-on: ubuntu-latest
+
         steps:
-        - run: echo '${{ toJSON(github.event) }}'
+          - name: Check out repository
+            uses: actions/checkout@v3
+    
+          - name: Edit Issue
+            run: |
+              issue_number=${{ github.event.issue.number }}
+              original_body=${{ github.event.issue.body }}
+              pat=${{ secrets.GITHUB_PAT }} 
+              template="\n\n# 概要\n\n## 要件\n\n## タスク\n- [ ] \n- [ ] \n- [ ] "}"
+    
+              curl -X PATCH -H "Authorization: Bearer $pat" \
+                -H "Accept: application/vnd.github.v3+json" \
+                "https://api.github.com/repos/${{ github.repository }}/issues/$issue_number" \
+                -d "{\"body\":\"$original_body $new_issue_body\"}"
